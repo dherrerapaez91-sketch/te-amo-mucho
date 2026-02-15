@@ -7,7 +7,7 @@
 <style>
 body{
     margin:0;
-    background: linear-gradient(to top, #1a1a1a, #330033);
+    background: linear-gradient(to top, #0f0c29, #302b63, #24243e);
     overflow:hidden;
     font-family: Arial, sans-serif;
     color:white;
@@ -15,46 +15,49 @@ body{
     cursor:pointer;
 }
 
+/* Título */
 h1{
     position:absolute;
     top:20px;
     width:100%;
-    font-size:40px;
+    font-size:45px;
     animation: brillo 2s infinite alternate;
 }
 
 @keyframes brillo{
-    from{opacity:0.6;}
+    from{opacity:0.7;}
     to{opacity:1;}
 }
 
-/* Árbol */
+/* Tronco */
 .tree{
     position:absolute;
     bottom:0;
     left:50%;
     transform:translateX(-50%);
-    width:20px;
-    height:200px;
-    background:#5c3a1a;
+    width:60px;
+    height:350px;
+    background:linear-gradient(to right, #4b2e05, #7a4a0c);
+    border-radius:20px;
 }
 
+/* Copa grande */
 .branches{
     position:absolute;
-    bottom:150px;
+    bottom:250px;
     left:50%;
     transform:translateX(-50%);
-    width:200px;
-    height:150px;
-    background: radial-gradient(circle at center, #2e8b57, #006400);
+    width:450px;
+    height:350px;
+    background: radial-gradient(circle at center, #ff4d88, #b30059);
     border-radius:50%;
+    box-shadow:0 0 50px #ff66a3;
 }
 
 /* Corazones */
 .heart{
     position:absolute;
-    color:#ff4d88;
-    animation: floatUp 4s linear forwards;
+    animation: floatUp 5s linear forwards;
 }
 
 @keyframes floatUp{
@@ -63,24 +66,25 @@ h1{
         opacity:1;
     }
     100%{
-        transform:translateY(-400px) scale(1.5);
+        transform:translateY(-600px) scale(1.8);
         opacity:0;
     }
 }
 
-/* Mensaje sorpresa */
+/* Mensaje */
 #mensaje{
     position:fixed;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%) scale(0);
-    background:rgba(0,0,0,0.8);
-    padding:40px;
-    border-radius:20px;
-    font-size:28px;
-    box-shadow:0 0 20px #ff4d88;
+    background:rgba(0,0,0,0.85);
+    padding:50px;
+    border-radius:25px;
+    font-size:30px;
+    box-shadow:0 0 40px #ff4d88;
     transition:0.5s;
     z-index:100;
+    max-width:600px;
 }
 
 #mensaje.mostrar{
@@ -91,15 +95,15 @@ h1{
 
 <body>
 
-<h1>Te Amo Mucho 💖</h1>
+<h1>Un Árbol que Florece por Ti 💖</h1>
 
 <div class="tree"></div>
 <div class="branches"></div>
 
 <div id="mensaje">
-    💌 Pasé mucho tiempo buscando a alguien… y al final no era alguien, eras tú.
-    <br><br>
-    Si pudiera elegir un lugar seguro, sería a tu lado.  Cuanto más tiempo estoy contigo, más te amo 💖
+💌 Pasé mucho tiempo buscando a alguien… y al final no era alguien, eras tú.
+<br><br>
+Si pudiera elegir un lugar seguro, sería a tu lado. Cuanto más tiempo estoy contigo, más te amo  💖
 </div>
 
 <script>
@@ -108,20 +112,19 @@ function createHeart(){
     heart.classList.add("heart");
     heart.innerHTML = "💖";
     
-    heart.style.left = (window.innerWidth/2 + (Math.random()*100-50)) + "px";
-    heart.style.bottom = "200px";
-    heart.style.fontSize = (Math.random()*20+15) + "px";
+    heart.style.left = (window.innerWidth/2 + (Math.random()*300-150)) + "px";
+    heart.style.bottom = "350px";
+    heart.style.fontSize = (Math.random()*25+20) + "px";
     
     document.body.appendChild(heart);
 
     setTimeout(()=>{
         heart.remove();
-    },4000);
+    },5000);
 }
 
-setInterval(createHeart, 500);
+setInterval(createHeart, 300);
 
-// Mostrar mensaje al hacer clic
 document.body.addEventListener("click", function(){
     document.getElementById("mensaje").classList.add("mostrar");
 });
