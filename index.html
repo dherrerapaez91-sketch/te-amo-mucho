@@ -2,131 +2,129 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para mi amor ❤️</title>
+<title>Para Ti 💖</title>
 
 <style>
 body{
-  background-color:#fce4ec;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  margin:0;
-  font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-  overflow:hidden;
-}
-
-.card{
-  background:#fff5f8;
-  padding:40px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  max-width:400px;
-  width:85%;
-  position:relative;
+    margin:0;
+    background: linear-gradient(to top, #1a1a1a, #330033);
+    overflow:hidden;
+    font-family: Arial, sans-serif;
+    color:white;
+    text-align:center;
+    cursor:pointer;
 }
 
 h1{
-  color:#e91e63;
-  margin-bottom:10px;
+    position:absolute;
+    top:20px;
+    width:100%;
+    font-size:40px;
+    animation: brillo 2s infinite alternate;
 }
 
-p{
-  color:#444;
-  font-size:1.1rem;
-  line-height:1.6;
+@keyframes brillo{
+    from{opacity:0.6;}
+    to{opacity:1;}
 }
 
-button{
-  margin-top:20px;
-  padding:10px 20px;
-  border:none;
-  border-radius:20px;
-  background:#e91e63;
-  color:white;
-  font-size:1rem;
-  cursor:pointer;
-  transition:0.3s;
+/* Árbol */
+.tree{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:20px;
+    height:200px;
+    background:#5c3a1a;
 }
 
-button:hover{
-  background:#c2185b;
+.branches{
+    position:absolute;
+    bottom:150px;
+    left:50%;
+    transform:translateX(-50%);
+    width:200px;
+    height:150px;
+    background: radial-gradient(circle at center, #2e8b57, #006400);
+    border-radius:50%;
 }
 
+/* Corazones */
 .heart{
-  position:absolute;
-  width:15px;
-  height:15px;
-  background:#e91e63;
-  transform:rotate(-45deg);
-  animation: float 6s infinite ease-in;
+    position:absolute;
+    color:#ff4d88;
+    animation: floatUp 4s linear forwards;
 }
 
-.heart:before,
-.heart:after{
-  content:"";
-  position:absolute;
-  width:15px;
-  height:15px;
-  background:#e91e63;
-  border-radius:50%;
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-400px) scale(1.5);
+        opacity:0;
+    }
 }
 
-.heart:before{
-  top:-8px;
-  left:0;
+/* Mensaje sorpresa */
+#mensaje{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) scale(0);
+    background:rgba(0,0,0,0.8);
+    padding:40px;
+    border-radius:20px;
+    font-size:28px;
+    box-shadow:0 0 20px #ff4d88;
+    transition:0.5s;
+    z-index:100;
 }
 
-.heart:after{
-  left:8px;
-  top:0;
-}
-
-@keyframes float{
-  0%{
-    transform:translateY(0) rotate(-45deg);
-    opacity:1;
-  }
-  100%{
-    transform:translateY(-800px) rotate(-45deg);
-    opacity:0;
-  }
+#mensaje.mostrar{
+    transform:translate(-50%, -50%) scale(1);
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>Para el amor de mi vida ❤️</h1>
-  <p>
-    Pasé mucho tiempo buscando a alguien…  
-    y al final no era alguien, eras tú.  
-    <br><br>
-    Si pudiera elegir un lugar seguro, sería a tu lado.  
-    <br>
-    Cuanto más tiempo estoy contigo, más te amo.
-  </p>
+<h1>Te Amo Mucho 💖</h1>
 
-  <button onclick="crearCorazones()">Te amo 💖</button>
+<div class="tree"></div>
+<div class="branches"></div>
+
+<div id="mensaje">
+    💌 Pasé mucho tiempo buscando a alguien… y al final no era alguien, eras tú.
+    <br><br>
+    Si pudiera elegir un lugar seguro, sería a tu lado.  Cuanto más tiempo estoy contigo, más te amo 💖
 </div>
 
 <script>
-function crearCorazones(){
-  for(let i=0;i<20;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(3+Math.random()*3)+"s";
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    
+    heart.style.left = (window.innerWidth/2 + (Math.random()*100-50)) + "px";
+    heart.style.bottom = "200px";
+    heart.style.fontSize = (Math.random()*20+15) + "px";
+    
     document.body.appendChild(heart);
 
     setTimeout(()=>{
-      heart.remove();
-    },6000);
-  }
+        heart.remove();
+    },4000);
 }
+
+setInterval(createHeart, 500);
+
+// Mostrar mensaje al hacer clic
+document.body.addEventListener("click", function(){
+    document.getElementById("mensaje").classList.add("mostrar");
+});
 </script>
 
 </body>
